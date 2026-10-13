@@ -1,0 +1,334 @@
+body {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 150, 40, 0.18),
+      transparent 15%
+    ),
+    radial-gradient(
+      circle at 78% 16%,
+      rgba(77, 170, 255, 0.18),
+      transparent 18%
+    ),
+    linear-gradient(rgba(10, 12, 20, 0.36), rgba(10, 12, 20, 0.55));
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background:
+    radial-gradient(
+      circle at 12% 28%,
+      rgba(255, 120, 45, 0.3) 0 1.2%,
+      transparent 1.8%
+    ),
+    radial-gradient(
+      circle at 18% 62%,
+      rgba(255, 178, 64, 0.22) 0 1.3%,
+      transparent 2%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(72, 172, 255, 0.25) 0 1.4%,
+      transparent 2%
+    ),
+    radial-gradient(
+      circle at 84% 75%,
+      rgba(53, 98, 255, 0.22) 0 1.3%,
+      transparent 2%
+    );
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+body::after {
+  background:
+    radial-gradient(
+      circle at 16% 35%,
+      rgba(255, 122, 30, 0.38) 0 10%,
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      rgba(72, 171, 255, 0.35) 0 12%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 52% 76%,
+      rgba(247, 182, 46, 0.24) 0 11%,
+      transparent 18%
+    );
+  filter: blur(26px);
+  opacity: 0.8;
+}
+
+.form-floating > .form-control {
+  background-color: #1a1a24 !important;
+  color: #ffffff !important;
+}
+
+.form-floating > .form-control:focus {
+  background-color: #222232 !important;
+  color: #ffffff !important;
+}
+
+#py1 .row img,
+#py2 .row img {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#py1 .row img:hover,
+#py2 .row img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 14px rgba(255, 193, 7, 0.85);
+}
+
+.character-full-preview {
+  max-height: 250px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
+  animation: previewFadeIn 0.3s ease-in-out;
+}
+
+@keyframes previewFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#arena {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  padding: 1.5rem;
+  min-height: 700px;
+  background: rgba(10, 16, 24, 0.08);
+  box-shadow: inset 0 0 40px rgba(255, 128, 0, 0.06);
+  backdrop-filter: blur(1.5px);
+}
+
+#arena::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 0;
+}
+
+#arena::after {
+  content: '';
+  position: absolute;
+  inset: 12% 8% 8%;
+  border-radius: 35% 35% 22% 22% / 26% 24% 18% 18%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 138, 0, 0.08),
+    rgba(0, 0, 0, 0.08) 60%,
+    transparent 80%
+  );
+  border: none;
+  box-shadow: none;
+  z-index: 0;
+}
+
+#arena > * {
+  position: relative;
+  z-index: 1;
+}
+
+#arena.powering::before {
+  filter: blur(16px) brightness(1.6) saturate(1.4);
+}
+
+.attack-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 2000;
+  will-change: opacity, visibility;
+}
+
+.attack-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.attack-visual {
+  width: min(56vw, 760px);
+  max-height: 62vh;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(255, 170, 0, 0.9)) brightness(1.2)
+    saturate(1.2);
+  animation: centralImpact 0.65s ease-out;
+}
+
+@keyframes centralImpact {
+  0% {
+    transform: scale(0.55) rotate(-8deg);
+    opacity: 0.2;
+  }
+  35% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.fighter {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  height: 100%;
+  box-shadow: none;
+  padding: 0.75rem 0.5rem;
+}
+
+.fighter.active-turn {
+  border: none;
+  box-shadow: none;
+}
+
+.battle-sprite {
+  display: block;
+  height: 230px;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.18));
+  animation: fighterIdle 3.2s ease-in-out infinite alternate;
+}
+
+#fighter-1 .battle-sprite {
+  animation-delay: 0.8s;
+}
+
+@keyframes fighterIdle {
+  0% {
+    transform: translateX(-4px) translateY(0px);
+  }
+  50% {
+    transform: translateX(4px) translateY(-2px);
+  }
+  100% {
+    transform: translateX(-2px) translateY(2px);
+  }
+}
+
+.fighter.powering .battle-sprite {
+  animation: powerBurst 0.55s ease-in-out;
+}
+
+@keyframes powerBurst {
+  0% {
+    transform: scale(0.96) translateY(0);
+    opacity: 0.8;
+  }
+  30% {
+    transform: scale(1.08) translateY(-10px);
+    filter: drop-shadow(0 0 18px rgba(255, 128, 0, 0.8));
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+#sprite-1 {
+  scale: -1 1;
+}
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.actions button:last-child {
+  grid-column: 1 / -1;
+}
+.actions small {
+  display: block;
+  font-size: 0.72rem;
+  margin-top: 3px;
+}
+.stat-label {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.shield-status {
+  min-height: 24px;
+  color: #6edff6;
+}
+.battle-log {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #14141d;
+  border-radius: 12px;
+  padding: 16px 16px 16px 36px;
+}
+.battle-log li {
+  padding: 5px;
+  color: #ddd;
+}
+#resultado {
+  font-size: 1.6rem;
+  color: #ffc107;
+}
+[role='button']:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+@media (max-width: 600px) {
+  h1.display-3 {
+    font-size: 2rem;
+  }
+  .battle-sprite {
+    height: 170px;
+  }
+  #py2 {
+    margin-top: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.academic-footer {
+  color: #adb5bd;
+  font-size: 0.875rem;
+}
+.academic-footer a {
+  color: #8ec5ff;
+}

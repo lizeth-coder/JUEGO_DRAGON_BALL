@@ -1,0 +1,30 @@
+{
+  "name": "dbz-2.0",
+  "version": "2.0.0",
+  "description": "Juego de combate por turnos para la asignatura Aplicaciones Web Frontend",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "watch": "npm run build && webpack --watch --mode development",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [],
+  "author": "Meza Corella Cesar",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "bootstrap": "^5.3.8",
+    "sweetalert2": "^11.26.25"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.5",
+    "playwright": "^1.64.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.111.0",
+    "webpack-cli": "^7.2.3"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}
